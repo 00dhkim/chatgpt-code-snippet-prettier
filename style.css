@@ -1,0 +1,47 @@
+/* 코드가 접혔을 때 */
+pre.user-block {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: -40px;
+}
+
+code.user-block {
+  margin-bottom: 40px;
+}
+code.collapsed {
+  max-height: 200px; /* 접히면 최소 높이로 설정 */
+  overflow: hidden;
+  margin-bottom: 0px;
+}
+
+/* 토글 버튼 스타일 */
+.code-toggle-btn {
+  position: relative;
+  width: 100%;
+  left: 0%;
+  bottom: 40px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1;
+
+  width: 90%;
+  height: 40px;
+  margin: 0px auto;
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(8.5px);
+  -webkit-backdrop-filter: blur(8.5px);
+}
+
+.code-toggle-btn:hover {
+  background-color: #0056b3;
+}
+
+.code-toggle-btn:focus {
+  outline: none;
+}
