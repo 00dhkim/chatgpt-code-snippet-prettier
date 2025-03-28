@@ -1,5 +1,7 @@
 /* 코드가 접혔을 때 */
 pre.user-block {
+  /* position: relative; */
+    /* 버튼 위치 기준 */
   display: flex;
   flex-direction: column;
   margin-bottom: -40px;
@@ -12,36 +14,62 @@ code.collapsed {
   max-height: 200px; /* 접히면 최소 높이로 설정 */
   overflow: hidden;
   margin-bottom: 0px;
+  position: relative;
+  }
+  
+  /* ::after를 이용한 하단 그라디언트 오버레이 */
+  code.collapsed::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  
+    /* 그라디언트 높이는 원하는 만큼 조절 */
+    height: 60px;
+  
+    /* 상단은 투명, 하단은 불투명(흰색)으로 서서히 전환 */
+    background: linear-gradient(to bottom, rgba(47, 47, 47, 0), rgba(47, 47, 47, 1));
+  
+    /* 코드 내용이 클릭되지 않도록(버튼 누르기에는 영향이 없습니다) */
+    pointer-events: none;
 }
 
 /* 토글 버튼 스타일 */
 .code-toggle-btn {
-  position: relative;
-  width: 100%;
-  left: 0%;
-  bottom: 40px;
-  padding: 5px 10px;
-  font-size: 12px;
-  color: white;
+position: relative;
+bottom: 40px;
+  /* 코드 하단에서 살짝 띄움 */
+    left: 10%;
+    height: 40px;
+    margin: 0px auto;
+    transform: translateX(-50%);
+  
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+  
+    background: linear-gradient(to right, #390f53, #541366);
+    /* 짙은 보라색 계열 */
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  z-index: 1;
 
-  width: 90%;
-  height: 40px;
-  margin: 0px auto;
-  box-sizing: border-box;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease;
 
-  background: rgba(255, 255, 255, 0);
-  backdrop-filter: blur(8.5px);
-  -webkit-backdrop-filter: blur(8.5px);
+  z-index: 2;
+    /* ::after보다 위에 올라오도록 */
+    opacity: 0.95;
 }
 
 .code-toggle-btn:hover {
-  background-color: #0056b3;
+  background: linear-gradient(to right, #340d44, #43104d);
+    transform: translateX(-50%) translateY(-2px);
 }
 
-.code-toggle-btn:focus {
-  outline: none;
+.code-toggle-btn:active {
+  transform: translateX(-50%) translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }

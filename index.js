@@ -98,17 +98,17 @@ function styleUserBlock() {
     codeBlock.classList.add("collapsed");
 
     const toggleButton = document.createElement("button");
-    toggleButton.textContent = "펴기";
+    toggleButton.textContent = "Load More";
     toggleButton.className = "code-toggle-btn";
 
     // 버튼 클릭 시 코드 접기/피기 기능
     toggleButton.addEventListener("click", () => {
       if (codeBlock.classList.contains("collapsed")) {
         codeBlock.classList.remove("collapsed");
-        toggleButton.textContent = "접기";
+        toggleButton.textContent = "Load Less";
       } else {
         codeBlock.classList.add("collapsed");
-        toggleButton.textContent = "피기";
+        toggleButton.textContent = "Load More";
       }
     });
 
