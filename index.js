@@ -91,6 +91,7 @@ window.onload = () => {
 function styleUserBlock() {
   // 코드 블록에 접기/피기 버튼을 추가하는 코드
   document.querySelectorAll("pre > code").forEach((codeBlock) => {
+    // 이미 버튼이 추가되어 있다면 건너뜀
     if (codeBlock.parentElement.getElementsByTagName("button").length > 0) return;
 
     codeBlock.parentElement.classList.add("user-block");
@@ -104,23 +105,72 @@ function styleUserBlock() {
     // 버튼 클릭 시 코드 접기/피기 기능
     toggleButton.addEventListener("click", () => {
       if (codeBlock.classList.contains("collapsed")) {
+        // 코드 확장 시: "Show Less" 버튼으로 변경
         codeBlock.classList.remove("collapsed");
         toggleButton.textContent = "Show Less";
+        // 스크롤 감지해서 원래 위치가 보이지 않으면 하단에 고정되는 복제본 생성
+        createFixedClone(toggleButton);
       } else {
+        // 코드 접힘 시: "Load More" 버튼으로 변경
         codeBlock.classList.add("collapsed");
         toggleButton.textContent = "Load More";
-
+        // 고정 복제본 제거
+        removeFixedClone(toggleButton);
         // 스크롤을 코드 블록 시작 위치로 이동
         codeBlock.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     });
 
-    // 버튼을 코드 블록 위에 추가
+    // 버튼을 코드 블록 컨테이너에 추가
     codeBlock.parentNode.append(toggleButton);
   });
 }
 
-// MutationObserver로 감지할 DOM 변경 설정
+// 원본 버튼의 복제본을 만들어 화면 하단에 고정시키는 함수
+function createFixedClone(originalButton) {
+  // 이미 복제본이 있으면 생성하지 않음
+  if (originalButton.fixedClone) return;
+  const fixedClone = originalButton.cloneNode(true);
+  fixedClone.classList.add("fixed-toggle");
+  // 복제본에도 클릭 이벤트 추가 (원본 버튼 클릭과 동일 동작)
+  fixedClone.addEventListener("click", () => {
+    originalButton.click();
+  });
+  document.body.appendChild(fixedClone);
+  originalButton.fixedClone = fixedClone;
+
+  // IntersectionObserver로 원본 버튼의 가시성을 감지
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      // 원본 버튼이 전부 보이지 않으면 고정 복제본을 보이고,
+      // 보이면 숨깁니다.
+      if (!entry.isIntersecting) {
+        fixedClone.style.display = "block";
+      } else {
+        fixedClone.style.display = "none";
+      }
+    });
+  }, { threshold: 1.0 });
+  observer.observe(originalButton);
+  originalButton.fixedCloneObserver = observer;
+
+  // 초기 상태는 숨김 처리
+  fixedClone.style.display = "none";
+}
+
+// 고정 복제본을 제거하는 함수
+function removeFixedClone(originalButton) {
+  if (originalButton.fixedClone) {
+    originalButton.fixedClone.remove();
+    originalButton.fixedClone = null;
+  }
+  if (originalButton.fixedCloneObserver) {
+    originalButton.fixedCloneObserver.disconnect();
+    originalButton.fixedCloneObserver = null;
+  }
+}
+
+// MutationObserver로 DOM 변경 감지 (기존 코드 유지)
 const observer = new MutationObserver(() => {
   observer.disconnect();
   styleUserBlock();
