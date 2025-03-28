@@ -105,10 +105,13 @@ function styleUserBlock() {
     toggleButton.addEventListener("click", () => {
       if (codeBlock.classList.contains("collapsed")) {
         codeBlock.classList.remove("collapsed");
-        toggleButton.textContent = "Load Less";
+        toggleButton.textContent = "Show Less";
       } else {
         codeBlock.classList.add("collapsed");
         toggleButton.textContent = "Load More";
+
+        // 스크롤을 코드 블록 시작 위치로 이동
+        codeBlock.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     });
 
