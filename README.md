@@ -4,7 +4,8 @@ ChatGPT 확장프로그램: 긴 코드를 묶어서 깔끔하게 이용하세요
 
 ## [live demo](http://00dhkim.me/demo/)
 
-![ezgif-1db0aa1f449e9e](https://github.com/user-attachments/assets/4b7fac83-a2b5-4360-9053-6a5dafd62780)
+
+![ezgif-79241ba5e349c4](https://github.com/user-attachments/assets/d30ff9da-d14d-4579-8486-1c7a5bb437dc)
 
 
 
