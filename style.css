@@ -13,7 +13,7 @@ code.user-block {
 code.collapsed {
   max-height: 200px; /* 접히면 최소 높이로 설정 */
   overflow: hidden;
-  margin-bottom: 0px;
+  margin-bottom: 0;
   position: relative;
   }
   
@@ -24,14 +24,9 @@ code.collapsed {
     bottom: 0;
     left: 0;
     width: 100%;
-  
-    /* 그라디언트 높이는 원하는 만큼 조절 */
-    height: 60px;
-  
-    /* 상단은 투명, 하단은 불투명(흰색)으로 서서히 전환 */
-    background: linear-gradient(to bottom, rgba(47, 47, 47, 0), rgba(47, 47, 47, 1));
-  
-    /* 코드 내용이 클릭되지 않도록(버튼 누르기에는 영향이 없습니다) */
+  height: 60px;
+    /* 그라디언트 높이 */
+    background: linear-gradient(to bottom, rgba(45, 45, 45, 0), rgba(45, 45, 45, 1));
     pointer-events: none;
 }
 
@@ -39,10 +34,7 @@ code.collapsed {
 .code-toggle-btn {
 position: relative;
 bottom: 40px;
-  /* 코드 하단에서 살짝 띄움 */
-    left: 10%;
-    height: 40px;
-    margin: 0px auto;
+  left: 50%;
     transform: translateX(-50%);
   
     padding: 6px 16px;
