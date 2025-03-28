@@ -65,3 +65,13 @@ bottom: 40px;
   transform: translateX(-50%) translateY(0);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
+/* 기존 스타일은 그대로 두고, 고정 버튼에 대한 스타일 추가 */
+.fixed-toggle {
+  position: fixed;
+  bottom: 20px;
+  /* 원하는 여백 값으로 조정 가능 */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+}
