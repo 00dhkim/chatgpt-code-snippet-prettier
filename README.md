@@ -2,10 +2,11 @@
 
 ChatGPT 확장프로그램: 긴 코드를 묶어서 깔끔하게 이용하세요
 
-## [live demo](http://00dhkim.me/demo/)
+## preview
+
+![ezgif-584305b1496590](https://github.com/user-attachments/assets/5b584b3b-bf72-40f9-a4e4-cda894edc172)
 
 
-![ezgif-79241ba5e349c4](https://github.com/user-attachments/assets/d30ff9da-d14d-4579-8486-1c7a5bb437dc)
 
 
 
