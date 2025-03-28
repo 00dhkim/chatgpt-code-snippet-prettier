@@ -1,0 +1,67 @@
+/* 코드가 접혔을 때 */
+pre.user-block {
+  /* position: relative; */
+    /* 버튼 위치 기준 */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: -40px;
+}
+
+code.user-block {
+  margin-bottom: 40px;
+}
+code.collapsed {
+  max-height: 200px; /* 접히면 최소 높이로 설정 */
+  overflow: hidden;
+  margin-bottom: 0;
+  position: relative;
+  }
+  
+  /* ::after를 이용한 하단 그라디언트 오버레이 */
+  code.collapsed::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  height: 60px;
+    /* 그라디언트 높이 */
+    background: linear-gradient(to bottom, rgba(45, 45, 45, 0), rgba(45, 45, 45, 1));
+    pointer-events: none;
+}
+
+/* 토글 버튼 스타일 */
+.code-toggle-btn {
+position: relative;
+bottom: 40px;
+  left: 50%;
+    transform: translateX(-50%);
+  
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+  
+    background: linear-gradient(to right, #390f53, #541366);
+    /* 짙은 보라색 계열 */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease;
+
+  z-index: 2;
+    /* ::after보다 위에 올라오도록 */
+    opacity: 0.95;
+}
+
+.code-toggle-btn:hover {
+  background: linear-gradient(to right, #340d44, #43104d);
+    transform: translateX(-50%) translateY(-2px);
+}
+
+.code-toggle-btn:active {
+  transform: translateX(-50%) translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
