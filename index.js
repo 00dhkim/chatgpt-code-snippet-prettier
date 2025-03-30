@@ -123,10 +123,12 @@ function styleUserBlock() {
           // 코드 확장 시: "Show Less" 버튼으로 변경
           codeBlock.classList.remove("collapsed");
           toggleButton.textContent = "Show Less";
+          toggleButton.classList.add("sticky-toggle");
         } else {
           // 코드 접힘 시: "Load More" 버튼으로 변경
           codeBlock.classList.add("collapsed");
           toggleButton.textContent = "Load More";
+          toggleButton.classList.remove("sticky-toggle");
           codeBlock.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       });

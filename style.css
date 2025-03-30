@@ -41,8 +41,6 @@ code.collapsed::after {
 /* 토글 버튼 스타일 - sticky 적용 */
 .code-toggle-btn {
   margin-top: auto;
-  position: sticky;
-  bottom: 5px;
   padding: 6px 16px;
   font-size: 13px;
   font-weight: 600;
@@ -60,6 +58,11 @@ code.collapsed::after {
   z-index: 2;
   /* ::after보다 위에 올라오도록 */
   opacity: 0.95;
+}
+
+.sticky-toggle {
+  position: sticky;
+  bottom: 5px;
 }
 
 .code-toggle-btn:hover {
