@@ -1,12 +1,19 @@
 {
   "manifest_version": 3,
-  "name": "chatgpt-code-snippet-prettier",
-  "version": "0.0",
+  "name": "Chatgpt Code Snippet Wrapper",
+  "short_name": "Snippet Wrap",
+  "version": "0.1",
   "content_scripts": [
     {
-      "matches": ["https://chatgpt.com/*"],
-      "js": ["index.js"],
-      "css": ["style.css"]
+      "matches": [
+        "https://chatgpt.com/*"
+      ],
+      "js": [
+        "index.js"
+      ],
+      "css": [
+        "style.css"
+      ]
     }
   ]
 }
