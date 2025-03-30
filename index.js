@@ -90,34 +90,50 @@ window.onload = () => {
 //접기 / 피기 버튼 추가
 function styleUserBlock() {
   // 코드 블록에 접기/피기 버튼을 추가하는 코드
+  // 모든 pre > code 요소에 대해 처리
   document.querySelectorAll("pre > code").forEach((codeBlock) => {
-    // 이미 버튼이 추가되어 있다면 건너뜀
-    if (codeBlock.parentElement.getElementsByTagName("button").length > 0) return;
+    const preElement = codeBlock.parentElement;
 
-    codeBlock.parentElement.classList.add("user-block");
-    codeBlock.classList.add("user-block");
-    codeBlock.classList.add("collapsed");
+    // 이미 감싸진 경우를 피하기 위해 wrapper 클래스 확인
+    if (!preElement.parentElement.classList.contains("code-block-wrapper")) {
+      // 새 wrapper div 생성 및 클래스 추가
+      const wrapper = document.createElement("div");
+      wrapper.className = "code-block-wrapper";
+      // preElement를 감싸도록 wrapper 삽입
+      preElement.parentElement.insertBefore(wrapper, preElement);
+      wrapper.appendChild(preElement);
+    }
 
-    const toggleButton = document.createElement("button");
-    toggleButton.textContent = "Load More";
-    toggleButton.className = "code-toggle-btn";
+    const wrapper = preElement.parentElement;
 
-    // 버튼 클릭 시 코드 접기/피기 기능
-    toggleButton.addEventListener("click", () => {
-      if (codeBlock.classList.contains("collapsed")) {
-        // 코드 확장 시: "Show Less" 버튼으로 변경
-        codeBlock.classList.remove("collapsed");
-        toggleButton.textContent = "Show Less";
-      } else {
-        // 코드 접힘 시: "Load More" 버튼으로 변경
-        codeBlock.classList.add("collapsed");
-        toggleButton.textContent = "Load More";
-        codeBlock.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    });
+    // 이미 버튼이 추가되어 있으면 건너뜀
+    if (wrapper.querySelector(".code-toggle-btn") == null) {
+      // 코드 블록 초기 상태 설정
+      preElement.classList.add("user-block");
+      codeBlock.classList.add("user-block", "collapsed");
 
-    // 버튼을 코드 블록 컨테이너에 추가
-    codeBlock.parentNode.append(toggleButton);
+      // 토글 버튼 생성
+      const toggleButton = document.createElement("button");
+      toggleButton.textContent = "Load More";
+      toggleButton.className = "code-toggle-btn";
+
+      // 버튼 클릭 시 코드 접기/피기 기능
+      toggleButton.addEventListener("click", () => {
+        if (codeBlock.classList.contains("collapsed")) {
+          // 코드 확장 시: "Show Less" 버튼으로 변경
+          codeBlock.classList.remove("collapsed");
+          toggleButton.textContent = "Show Less";
+        } else {
+          // 코드 접힘 시: "Load More" 버튼으로 변경
+          codeBlock.classList.add("collapsed");
+          toggleButton.textContent = "Load More";
+          codeBlock.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+
+      // wrapper 안에서 preElement의 바로 다음에 버튼 삽입
+      preElement.insertAdjacentElement("afterend", toggleButton);
+    }
   });
 }
 
