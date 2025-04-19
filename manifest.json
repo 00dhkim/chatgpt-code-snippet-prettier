@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Chatgpt Code Snippet Wrapper",
   "short_name": "Snippet Wrap",
-  "version": "0.1",
+  "version": "0.2",
   "content_scripts": [
     {
       "matches": [

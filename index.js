@@ -4,20 +4,24 @@
 // 2-1. 입력창에서 원래 코드 탐지
 // 2-2. 앞뒤로 삼중 백틱 집어넣기
 
-//코드 감지
-const languagePatterns = [
-  { name: "javascript", pattern: /\b(function|let|const|var|class|console\.log|=>|\{|\})\b/ },
-  { name: "python", pattern: /\b(def|class|import|print)\b/ },
-  { name: "java", pattern: /\b(class|public|private|static|void)\b/ },
-  { name: "c", pattern: /\b(int|char|void|if|for|while)\b/ },
+/* ────────── 1. 코드 감지 ────────── */
+const genericIndicators = [
+  /[{[\]()]/,                 // 각종 괄호
+  /;/,                        // 세미콜론
+  /=>/,                       // 화살표 함수
+  /^\s{2,}\S+/m,              // 들여쓰기
+  /\/\//,                     // 한 줄 주석
+  /\/\*[\s\S]*?\*\//,         // 블록 주석
+  /#include\s*<.+>/,          // C/C++ 인클루드
+  /\bdef\s+\w+\s*\(.*\):/,    // Python 함수 정의
 ];
 
-function detectCode(text) {
-  for (let lang of languagePatterns) {
-    if (lang.pattern.test(text)) return lang.name;
-  }
+function isCodeStrict(text) {
+  if (text.trim().length < 20 || !text.includes("\n")) return false;
 
-  return null;
+  let votes = 0;
+  genericIndicators.forEach((r) => { if (r.test(text)) votes++; });
+  return votes >= 2;           // 특징 2개 이상이면 코드로 간주
 }
 
 //배열 속 배열 찾기
@@ -39,9 +43,8 @@ function findIdxOfArray(srcArray, targetSequence) {
 function pasteEventListener(event) {
   const pastedText = event.clipboardData.getData("text");
 
-  ////언어 탐지
-  const detectedLanguage = detectCode(pastedText);
-  if (!detectedLanguage) return;
+  // 코드 여부 판별
+  if (!isCodeStrict(pastedText)) return;
 
   ////입력창에서의 위치 찾기
   const pastedCodeList = pastedText.split("\n");
@@ -57,9 +60,9 @@ function pasteEventListener(event) {
   ////앞 뒤로 삼중 백틱 삽입
   //삽입할 노드 생성
   const upperNode = document.createElement("p");
-  upperNode.textContent = `\`\`\`${detectedLanguage}`;
+  upperNode.textContent = "```";
   const lowerNode = document.createElement("p");
-  lowerNode.textContent = `\`\`\``;
+  lowerNode.textContent = "```";
 
   //삽입
   let parentNode = document.getElementById("prompt-textarea");
