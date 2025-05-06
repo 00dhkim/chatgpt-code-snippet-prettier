@@ -15,6 +15,10 @@ Also, when you paste (Ctrl+V) code into the input box, the extension detects it 
 
 Hope you find it useful and I'm always open to feedback!
 
+## Installation
+
+[https://chromewebstore.google.com/detail/chatgpt-code-snippet-wrap/ndjbfbmhalinedijklommdonehmoajil](https://chromewebstore.google.com/detail/chatgpt-code-snippet-wrap/ndjbfbmhalinedijklommdonehmoajil)
+
 ## preview
 
 ![ezgif-7fb8b0628e637e](https://github.com/user-attachments/assets/d7b0cdd9-78b3-4028-91db-d38719ca782d)
